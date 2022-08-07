@@ -1,0 +1,1839 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    @media screen and (min-width: 768px) {
+      .sp-br {
+        display: none;
+      }
+    }
+
+    .grid-table {
+      display: grid;
+      grid-template-columns: .6fr 1fr 1fr 1fr;
+      color: #0d9435;
+      border: 5px double #0d9435;
+      border-radius: 5px;
+      text-align: center;
+      gap: 5px;
+      white-space: nowrap;
+      padding: 3px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    main {
+      margin: 0 0 20px;
+    }
+
+    .chicken-img {
+      width: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+      aspect-ratio: 1/.9;
+    }
+
+    .img-wrap {
+      width: 320px;
+    }
+
+    .chicken-price-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      text-align: center;
+    }
+
+    .chicken-price-ttl {
+      font-size: 80%;
+      font-weight: bold;
+      background-color: #088522;
+      color: #fff;
+      width: 100%;
+      padding: 4px 0;
+    }
+
+    .chicken-price {
+      color: #088522;
+      align-self: center;
+    }
+
+    .chicken-price-text {
+      border: 2px solid #5f5d5d;
+      background: #5f5d5d;
+      color: #fff;
+    }
+
+    .chicken-desc {
+      color: #258039b5;
+      font-size: 85%;
+      line-height: 1.3;
+      height: 60px;
+      text-shadow: #cf3721 1px 1px 40px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .side-menu-item {
+      color: #258039;
+      text-align: center;
+      font-size: 18px;
+      padding: 5px 0;
+      width: 90%;
+      margin: 0 auto;
+      border-bottom: 1px solid #d6eac7
+    }
+
+    .side-menu-list {
+      box-shadow: 0 2.5rem 2rem -2rem hsl(200deg 50% 20% / 40%);
+      height: 400px;
+      position: relative;
+      border: 1px solid #4a8c4a36;
+    }
+
+    .side-menu-price {
+      color: #258039;
+      text-align: center;
+      position: absolute;
+      right: 0;
+      left: 0;
+      bottom: 0;
+    }
+
+    .side-menu-desc {
+      margin: 10px 0 0 0;
+      font-size: 85%;
+      display: grid;
+      align-items: start;
+      color: #258039;
+      line-height: 1.3;
+    }
+
+    .set-img {
+      width: min(100%, 460px);
+      padding: 0;
+    }
+
+    .set-img-wrapper {
+      gap: 10px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      margin: 0 0 30px;
+    }
+
+    .piece {
+      position: absolute;
+      right: 30px;
+      top: 0
+    }
+
+    .sm-text-sm {
+      font-size: 150%;
+      vertical-align: middle;
+    }
+
+    .set-drink {
+      padding: 10px 20px;
+      list-style: none;
+      border: 2px dashed #0d94354a;
+      border-radius: 2px;
+      margin: 0 20px;
+      line-height: 1.4;
+    }
+
+    .select {
+      font-size: 80%;
+    }
+
+    .chicken-source {
+      font-size: 90%;
+      padding: 0 0 0 20px;
+    }
+
+    .set-item-wrapper {
+      position: relative;
+      margin: 0 0 10px 0;
+    }
+
+    .chicken-list {
+      list-style: none;
+      padding-bottom: 5px;
+      line-height: 1.4;
+      font-size: 90%;
+    }
+
+    .chicken-area {
+      padding-left: 10px;
+      font-size: 110%
+    }
+
+    .menu-wrapper {
+      list-style: none;
+      color: #088522;
+      padding: 0 0 60px 0;
+    }
+
+    .set-menu-side {
+      font-size: 110%;
+      padding-right: 10px;
+    }
+
+    .lunch-ttl {
+      display: grid;
+      grid-template-columns: 70px 1fr 90px;
+      padding: 10px 6vw
+    }
+
+    .set-title-text {
+      font-weight: bold;
+      font-size: clamp(20px, 4vw, 22px);
+    }
+
+    /* .t_soft {
+      border-top: 1px solid #088522;
+      border-right: 10px solid #046118;
+      border-left: 30px double #046118;
+      padding: 5px 5px 5px 15px;
+      background: #fff;
+      background: -moz-linear-gradient(top, #eee, #ccc);
+      background: -webkit-gradient(linear, left top, left bottom, from(rgb(170 255 170 / 80%)), to(#088522));
+      border-radius: 7px;
+      -moz-border-radius: 7px;
+      -webkit-border-radius: 7px;
+      font-size: 140%;
+      text-shadow: 0 0 5px #00000045;
+      color: #fff;
+    } */
+
+    .set-title::after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      content: '';
+      border-radius: 3px;
+      background-image: -webkit-gradient(linear, right top, left top, from(#22cd26), to(#258039));
+      background-image: -webkit-linear-gradient(right, #22cd26 0%, #258039 100%);
+      background-image: linear-gradient(to left, #22cd26 0%, #258039 100%);
+    }
+
+    .chimaek-set-price,
+    .combo-set-price {
+      font-weight: bold;
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      font-size: clamp(20px, 4vw, 22px);
+    }
+
+    @media screen and (max-width: 600px) {
+      .sp-text-sm {
+        font-size: 15px;
+      }
+
+      .piece {
+        right: 0;
+        font-size: 16px;
+        top: 2px
+      }
+
+      .set-drink {
+        padding: 10px;
+        margin: 0 10px;
+        font-size: 90%;
+      }
+
+      .set-menu-item {
+        font-size: 16px;
+      }
+
+      .chicken-list {
+        font-size: 15px;
+      }
+
+      .select {
+        text-align: center;
+        padding: 0 5px 0 0;
+      }
+
+      .chicken-source {
+        padding-left: 20px;
+      }
+
+      .set-title::after {
+        position: absolute;
+        bottom: -15px;
+      }
+
+      .chimaek-set-price,
+      .combo-set-price {
+        position: absolute;
+        bottom: -10px;
+      }
+    }
+
+    .set-kind {
+      background: #046118;
+      border-radius: 999px;
+      width: 45px;
+      height: 45px;
+      color: #fff;
+      display: inline-block;
+      text-align: center;
+      line-height: 45px;
+      margin-right: 10px;
+      font-size: 150%;
+      grid-row: 1 /span 2
+    }
+
+    .set-img-photo {
+      text-align: center;
+    }
+
+    .set-title {
+      position: relative;
+      font-weight: bold;
+      padding: 0 70px 10px 10px;
+      padding: 10px;
+      width: min(90%, 600px);
+      margin: 50px auto;
+    }
+
+    summary {
+      display: block;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    @media screen and (min-width: 769px) {
+      details {
+        pointer-events: none;
+      }
+    }
+
+    @media screen and (max-width: 900px) {
+      .set-img-wrapper {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .set-img-photo {
+        grid-column: 1 / span 2;
+      }
+    }
+
+  </style>
+  <script>
+    (function (d) {
+      var config = {
+        kitId: 'pyv6rpw',
+        scriptTimeout: 3000,
+        async: true
+      },
+        h = d.documentElement, t = setTimeout(function () { h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive"; }, config.scriptTimeout), tk = d.createElement("script"), f = false, s = d.getElementsByTagName("script")[0], a; h.className += " wf-loading"; tk.src = 'https://use.typekit.net/' + config.kitId + '.js'; tk.async = true; tk.onload = tk.onreadystatechange = function () { a = this.readyState; if (f || a && a != "complete" && a != "loaded") return; f = true; clearTimeout(t); try { Typekit.load(config) } catch (e) { } }; s.parentNode.insertBefore(tk, s)
+    })(document);
+  </script>
+</head>
+
+<body>
+  <main>
+    <p style="text-align: center; color: #0d9435; margin-bottom: 5px;"><span
+        style="font-size: 180%;">3</span>種類のチキン<span style="font-size: 180%;">2</span>種類のサイズより<br
+        class="sp-br" />お選び頂けます。</p>
+
+    <div class="grid-table"
+      style="display: grid; grid-template-columns: .6fr 1fr 1fr 1fr; color: #0d9435; border: 5px double #0d9435; border-radius: 5px; text-align: center; gap: 5px; white-space: nowrap; padding: 3px; margin-bottom: 50px;">
+      <div></div>
+      <div style="text-align: center; background: #d6eac7; padding: 6px; border-radius: 3px;"><b>MIX</b></div>
+      <div style="text-align: center; background: #d6eac7; padding: 6px; border-radius: 3px;"><b>骨なし</b></div>
+      <div style="text-align: center; background: #d6eac7; padding: 6px; border-radius: 3px;"><b>骨あり</b></div>
+      <div
+        style="font-size: 14px; border: 2px dashed #d6eac7; display: flex; justify-content: center; align-items: center; border-radius: 5px;">
+        <b>HALF</b>
+      </div>
+      <div style="font-size: 90%; border: 2px dashed #d6eac7; padding: 10px 0px; border-radius: 5px;">手羽元+手羽先<br
+          class="sp-br" />3~4個<br>
+        むね肉 2個<br>
+        もも肉 2個</div>
+      <div style="font-size: 90%; border: 2px dashed #d6eac7; padding: 10px 0; border-radius: 5px;">むね肉 3個<br>
+        もも肉 3個</div>
+      <div style="font-size: 90%; border: 2px dashed #d6eac7; padding: 10px 0; border-radius: 5px;">手羽元 3個<br>
+        手羽先 3個</div>
+      <div
+        style="font-size: 14px; border: 2px dashed #d6eac7; display: flex; justify-content: center; align-items: center; border-radius: 5px;">
+        <b>FULL</b>
+      </div>
+      <div style="font-size: 90%; border: 2px dashed #d6eac7; padding: 10px 0; border-radius: 5px;">手羽元 3個<br>
+        手羽先 3個<br>
+        むね肉 4個<br>
+        もも肉 4個</div>
+      <div style="font-size: 90%; border: 2px dashed #d6eac7; padding: 10px 0; border-radius: 5px;">むね肉 6個<br>
+        もも肉 6個</div>
+      <div style="font-size: 90%; border: 2px dashed #d6eac7; padding: 10px 0; border-radius: 5px;">手羽元 5個<br>
+        手羽先 5個</div>
+    </div>
+    <details open>
+      <summary id="mix"
+        style="cursor: pointer; text-align: center; color: #e4f5d3; font-size: larger; padding: 10px; width: 320px; background: #258039; margin: 20px auto; border-radius: 50px; position: relative; border: 2px solid #258039;">
+        <img width="29" style="position: absolute; left: 50px; top: 15px;"
+          src="https://chicken-street.jp/wp-content/uploads/2022/08/にわとりアイコン2.png">Korean Chicken<br><span
+          style="font-size: 70%;">韓国チキン</span>
+      </summary>
+      <ul
+        style="display: flex; list-style: none; justify-content: space-around; column-gap: 50px; row-gap: 100px; flex-wrap: wrap; margin-top: 10px; padding: 30px 0;">
+        <li style="width: 320px; padding: 0;">
+          <img class="chicken-img" src="https://chicken-street.jp/wp-content/uploads/2022/08/フライド.jpg" />
+          <p style="color: #088522; text-align: center; font-size: 20px; margin: 10px;"><b>フライド</b><br>
+            <span style="font-size: 80%;">Korean Fried</span>
+          </p>
+          <p class="chicken-desc">
+            本場顔負け！ パリッとサクサク！<br>ジューシーチキン！</p>
+          <div class="chicken-price-grid">
+            <div class="chicken-price-text">Price</div>
+            <div class="chicken-price-ttl">
+              HALF
+            </div>
+            <div class="chicken-price-ttl">
+              FULL
+            </div>
+            <div class="chicken-price-ttl">
+              MIX
+            </div>
+            <div class="chicken-price">
+              &yen;1380
+            </div>
+            <div class="chicken-price">
+              &yen;2380
+            </div>
+            <div class="chicken-price-ttl">
+              骨なし・骨あり
+            </div>
+            <div class="chicken-price">
+              &yen;1480
+            </div>
+            <div class="chicken-price">
+              &yen;2480
+            </div>
+          </div>
+        </li>
+        <li style="width: 320px; padding: 0;">
+          <img class="chicken-img" src="https://chicken-street.jp/wp-content/uploads/2022/08/ヤンニョム.png"
+            alt="ヤンニョムチキンの骨つきと骨なしのミックス" />
+          <p style="color: #088522; text-align: center; font-size: 20px; margin: 10px;"><b>ヤンニョム</b><img
+              style="vertical-align: middle; width: 20px;"
+              src="https://chicken-street.jp/wp-content/uploads/2021/04/唐辛子のアイコン1-2.png" /><img
+              style="vertical-align: middle; width: 20px;"
+              src="https://chicken-street.jp/wp-content/uploads/2021/04/唐辛子のアイコン1-1.png" /><img
+              style="vertical-align: middle; width: 20px;"
+              src="https://chicken-street.jp/wp-content/uploads/2021/04/唐辛子のアイコン1-1.png" /><br>
+            <span style="font-size: 80%;">Seasoning</span>
+          </p>
+          <p class="chicken-desc">
+            当店自慢の甘辛ソース！<br>ソウルの味をココで！</p>
+          <div class="chicken-price-grid">
+            <div class="chicken-price-text">Price</div>
+            <div class="chicken-price-ttl">
+              HALF
+            </div>
+            <div class="chicken-price-ttl">
+              FULL
+            </div>
+            <div class="chicken-price-ttl">
+              MIX
+            </div>
+            <div class="chicken-price">
+              &yen;1500
+            </div>
+            <div class="chicken-price">
+              &yen;2580
+            </div>
+            <div class="chicken-price-ttl">
+              骨なし・骨あり
+            </div>
+            <div class="chicken-price">
+              &yen;1600
+            </div>
+            <div class="chicken-price">
+              &yen;2680
+            </div>
+          </div>
+        </li>
+        <li style="width: 320px; padding: 0;">
+          <img class="chicken-img" src="https://chicken-street.jp/wp-content/uploads/2022/08/ハニーガーリック.png" />
+          <p style="color: #088522; text-align: center; font-size: 20px; margin: 10px;"><b>ハニーガーリック</b><br>
+            <span style="font-size: 80%;">Honey Garlic</span>
+          </p>
+          <p class="chicken-desc">
+            絶妙な甘さとしょっぱさのバランス！<br>本場で人気の甘とろソース！</p>
+          <div class="chicken-price-grid">
+            <div class="chicken-price-text">Price</div>
+            <div class="chicken-price-ttl">
+              HALF
+            </div>
+            <div class="chicken-price-ttl">
+              FULL
+            </div>
+            <div class="chicken-price-ttl">
+              MIX
+            </div>
+            <div class="chicken-price">
+              &yen;1500
+            </div>
+            <div class="chicken-price">
+              &yen;2580
+            </div>
+            <div class="chicken-price-ttl">
+              骨なし・骨あり
+            </div>
+            <div class="chicken-price">
+              &yen;1700
+            </div>
+            <div class="chicken-price">
+              &yen;2780
+            </div>
+          </div>
+        </li>
+        <li style="width: 320px; padding: 0;">
+          <img class="chicken-img" src="https://chicken-street.jp/wp-content/uploads/2022/08/スパイシーヤンニョム.png"
+            alt="骨つきと骨ありがミックスされたスパイシーヤンニョムチキン画像" />
+          <p style="color: #088522; text-align: center; font-size: 20px; margin: 10px 0;"><b>スパイシーヤンニョム</b>
+            <img style="vertical-align: middle; width: 20px;"
+              src="https://chicken-street.jp/wp-content/uploads/2021/04/唐辛子のアイコン1-2.png" /><img
+              style="vertical-align: middle; width: 20px;"
+              src="https://chicken-street.jp/wp-content/uploads/2021/04/唐辛子のアイコン1-2.png" /><img
+              style="vertical-align: middle; width: 20px;"
+              src="https://chicken-street.jp/wp-content/uploads/2021/04/唐辛子のアイコン1-1.png"
+              alt="骨つきと骨なしがミックスされたスパイシーヤンニョムチキン画像" /><br>
+            <span style="font-size: 80%;">Spicy Seasoning</span>
+          </p>
+          <p class="chicken-desc">
+            辛さを足したいあなたへ！<br>揚げた唐辛子のあと引く辛さがクセになる！</p>
+          <div class="chicken-price-grid">
+            <div class="chicken-price-text">Price</div>
+            <div class="chicken-price-ttl">
+              HALF
+            </div>
+            <div class="chicken-price-ttl">
+              FULL
+            </div>
+            <div class="chicken-price-ttl">
+              MIX
+            </div>
+            <div class="chicken-price">
+              &yen;1600
+            </div>
+            <div class="chicken-price">
+              &yen;2680
+            </div>
+            <div class="chicken-price-ttl">
+              骨なし・骨あり
+            </div>
+            <div class="chicken-price">
+              &yen;1600
+            </div>
+            <div class="chicken-price">
+              &yen;2680
+            </div>
+          </div>
+        </li>
+        <li style="width: 320px; padding: 0;">
+          <img class="chicken-img" src="https://chicken-street.jp/wp-content/uploads/2022/08/スノーチーズ.png" />
+          <p style="color: #088522; text-align: center; font-size: 20px; margin: 10px;"><b>スノーチーズ</b><br>
+            <span style="font-size: 80%;">Snow Cheese</span>
+          </p>
+          <p class="chicken-desc">
+            濃厚な甘みとコクがあとを引く！</p>
+          <div class="chicken-price-grid">
+            <div class="chicken-price-text">Price</div>
+            <div class="chicken-price-ttl">
+              HALF
+            </div>
+            <div class="chicken-price-ttl">
+              FULL
+            </div>
+            <div class="chicken-price-ttl">
+              MIX
+            </div>
+            <div class="chicken-price">
+              &yen;1600
+            </div>
+            <div class="chicken-price">
+              &yen;2680
+            </div>
+            <div class="chicken-price-ttl">
+              骨なし・骨あり
+            </div>
+            <div class="chicken-price">
+              &yen;1600
+            </div>
+            <div class="chicken-price">
+              &yen;2680
+            </div>
+          </div>
+        </li>
+        <li style="width: 320px; padding: 0;">
+          <img class="chicken-img" src="https://chicken-street.jp/wp-content/uploads/2022/08/ガーリック醤油.png" />
+          <p style="color: #088522; text-align: center; font-size: 20px; margin: 10px;"><b>ガーリック醤油</b><br>
+            <span style="font-size: 80%;">Garlic Soy sauce</span>
+          </p>
+          <p class="chicken-desc">
+            <strong
+              style="background: #ACD156; border-radius: 999px; padding: 3px 15px; color:#edf5da; position: absolute;top:-10px;">スタッフイチオシ</strong><br>ガーリックと醬油の鉄板コンビネーション
+          </p>
+          <div class="chicken-price-grid">
+            <div class="chicken-price-text">Price</div>
+            <div class="chicken-price-ttl">
+              HALF
+            </div>
+            <div class="chicken-price-ttl">
+              FULL
+            </div>
+            <div class="chicken-price-ttl">
+              MIX
+            </div>
+            <div class="chicken-price">
+              &yen;1500
+            </div>
+            <div class="chicken-price">
+              &yen;2580
+            </div>
+            <div class="chicken-price-ttl">
+              骨なし・骨あり
+            </div>
+            <div class="chicken-price">
+              &yen;1600
+            </div>
+            <div class="chicken-price">
+              &yen;2680
+            </div>
+          </div>
+        </li>
+        <li style="width: 320px; padding: 0;">
+          <img class="chicken-img" src="https://chicken-street.jp/wp-content/uploads/2022/08/青唐辛子ガーリック.png" />
+          <p style="color: #088522; text-align: center; font-size: 20px; margin: 10px 0;"><b>青唐辛子ガーリック</b><img
+              style="vertical-align: middle; width: 20px;"
+              src="https://chicken-street.jp/wp-content/uploads/2021/04/唐辛子のアイコン1-2.png" /><img
+              style="vertical-align: middle; width: 20px;"
+              src="https://chicken-street.jp/wp-content/uploads/2021/04/唐辛子のアイコン1-2.png" /><img
+              style="vertical-align: middle; width: 20px;"
+              src="https://chicken-street.jp/wp-content/uploads/2021/04/唐辛子のアイコン1-2.png" /><br>
+            <span style="font-size: 80%;">Green Pepper Garlic</span>
+          </p>
+          <p class="chicken-desc">
+            パンチの効いた爽快な辛さが大人気！</p>
+          <div class="chicken-price-grid">
+            <div class="chicken-price-text">Price</div>
+            <div class="chicken-price-ttl">
+              HALF
+            </div>
+            <div class="chicken-price-ttl">
+              FULL
+            </div>
+            <div class="chicken-price-ttl">
+              MIX
+            </div>
+            <div class="chicken-price">
+              &yen;1500
+            </div>
+            <div class="chicken-price">
+              &yen;2580
+            </div>
+            <div class="chicken-price-ttl">
+              骨なし・骨あり
+            </div>
+            <div class="chicken-price">
+              &yen;1600
+            </div>
+            <div class="chicken-price">
+              &yen;2680
+            </div>
+          </div>
+        </li>
+        <li style="width: 320px; padding: 0;">
+          <img class="chicken-img" src="https://chicken-street.jp/wp-content/uploads/2022/08/トガマヨ.png" />
+          <p style="color: #088522; text-align: center; font-size: 20px; margin: 10px;"><b>トガマヨ</b><img
+              style="vertical-align: middle; width: 20px;"
+              src="https://chicken-street.jp/wp-content/uploads/2021/04/唐辛子のアイコン1-2.png" /><img
+              style="vertical-align: middle; width: 20px;"
+              src="https://chicken-street.jp/wp-content/uploads/2021/04/唐辛子のアイコン1-1.png" /><img
+              style="vertical-align: middle; width: 20px;"
+              src="https://chicken-street.jp/wp-content/uploads/2021/04/唐辛子のアイコン1-1.png" /><br>
+            <span style="font-size: 80%;">Green Pepper Mayo</span>
+          </p>
+          <p class="chicken-desc">
+            甘くてまろやかなマヨソースの中に<br>
+            ピリッと後引く辛さ！</p>
+          <div class="chicken-price-grid">
+            <div class="chicken-price-text">Price</div>
+            <div class="chicken-price-ttl">
+              HALF
+            </div>
+            <div class="chicken-price-ttl">
+              FULL
+            </div>
+            <div class="chicken-price-ttl">
+              MIX
+            </div>
+            <div class="chicken-price">
+              &yen;1500
+            </div>
+            <div class="chicken-price">
+              &yen;2580
+            </div>
+            <div class="chicken-price-ttl">
+              骨なし・骨あり
+            </div>
+            <div class="chicken-price">
+              &yen;1600
+            </div>
+            <div class="chicken-price">
+              &yen;2680
+            </div>
+          </div>
+        </li>
+        <li style="width: 320px; padding: 0;">
+          <img class="chicken-img" src="https://chicken-street.jp/wp-content/uploads/2022/08/スプリンクル.png" />
+          <p style="color: #088522; text-align: center; font-size: 20px; margin: 10px;"><b>スプリンクル</b><br>
+            <span style="font-size: 80%;">Sprinkle</span>
+          </p>
+          <p class="chicken-desc">
+            その魅力にはまると抜け出せない！<br>
+            ここでしか味わえない味がやみつきになる！</p>
+          <div class="chicken-price-grid">
+            <div class="chicken-price-text">Price</div>
+            <div class="chicken-price-ttl">
+              HALF
+            </div>
+            <div class="chicken-price-ttl">
+              FULL
+            </div>
+            <div class="chicken-price-ttl">
+              MIX
+            </div>
+            <div class="chicken-price">
+              &yen;1680
+            </div>
+            <div class="chicken-price">
+              &yen;2760
+            </div>
+            <div class="chicken-price-ttl">
+              骨なし・骨あり
+            </div>
+            <div class="chicken-price">
+              &yen;1780
+            </div>
+            <div class="chicken-price">
+              &yen;2860
+            </div>
+          </div>
+        </li>
+        <li style="width: 320px; padding: 0;">
+          <img class="chicken-img" src="https://chicken-street.jp/wp-content/uploads/2022/08/ハーフMix.png" />
+          <p style="color: #088522; text-align: center; font-size: 20px; margin: 10px;"><b>ハーフ＆ハーフ</b><br>
+            <span style="font-size: 80%;">Half&amp;Half</span>
+          </p>
+          <p class="chicken-desc">
+            お好きなソースを2種類選択できる<br>
+            お得なメニュー！</p>
+          <div class="chicken-price-grid">
+            <div class="chicken-price-text">Price</div>
+            <div class="chicken-price-ttl">
+              HALF
+            </div>
+            <div class="chicken-price-ttl">
+              FULL
+            </div>
+            <div class="chicken-price-ttl">
+              MIX
+            </div>
+            <div class="chicken-price">
+              -
+            </div>
+            <div class="chicken-price">
+              &yen;2780
+            </div>
+            <div class="chicken-price-ttl">
+              骨なし
+            </div>
+            <div class="chicken-price">
+              -
+            </div>
+            <div class="chicken-price">
+              &yen;2880
+            </div>
+          </div>
+          <small style="color: #088522; display: block; line-height: 1.3; margin: 5px;">※スパイシーヤンニョムをお選びいただいた場合、<br>
+            <span style="padding-left: 12px;">＋￥100を頂戴しております。</span></small>
+          <small style="color: #088522; display: block; line-height: 1.3; margin: 5px;">※スプリンクルをお選びいただいた場合、<br>
+            <span style="padding-left: 12px;">＋￥180を頂戴しております。</span></small>
+        </li>
+      </ul>
+    </details>
+
+
+
+
+
+
+
+
+    <details open style="position: relative;">
+
+      <summary id="side-menu" style="font-weight: normal; font-size: larger;
+    color: #258039;
+    border: 2px solid #258039;
+    border-radius: 9999px;
+    width: 320px;
+padding: 10px;
+position: absolute;
+left:0;
+position: relative;
+    margin: 20px auto; text-align: center; cursor: pointer"><img width="29"
+          style="position: absolute; left: 50px; top: 15px;"
+          src="https://chicken-street.jp/wp-content/uploads/2022/07/にわとりアイコン2.png">Side Menu<br><span
+          style="font-size: 70%;">サイド</span></summary>
+      <ul
+        style="display: flex; list-style: none; justify-content: space-around; flex-wrap: wrap; margin-top: 10px; padding: 30px 0 50px 0; row-gap: 100px;">
+        <li class="side-menu-list">
+          <div class="img-wrap"><img class="side-image"
+              style="width: 100%; height: 220px; border-radius: 2px; transition: 1s all; object-fit: cover;"
+              src="https://chicken-street.jp/wp-content/uploads/2022/08/チキンム.png" /></div>
+          <p class="side-menu-item">
+            <b>大根ピクルス</b><br>
+            <span style="font-size: 90%;">Pickled Radish</span>
+          </p>
+
+          <div style="text-align: center;">
+            <p class="side-menu-desc">チキンには欠かせない一品。<br>
+              韓国の味を再現！</p>
+          </div>
+
+          <p class="side-menu-price">
+            <b>¥150</b>
+          </p>
+        </li>
+
+        <li class="side-menu-list">
+          <div class="img-wrap"><img class="side-image"
+              style="width: 100%; height: 220px; border-radius: 2px; transition: 1s all; object-fit: cover;"
+              src="https://chicken-street.jp/wp-content/uploads/2022/08/枝豆.jpg" /></div>
+          <p class="side-menu-item">
+            <b>枝豆</b><br>
+            <span style="font-size: 90%;">Boiled Green Beans</span>
+          </p>
+
+          <div style="text-align: center">
+            <p class="side-menu-desc">ビールのお供に！</p>
+          </div>
+
+          <p class="side-menu-price">
+            <b>¥250</b>
+          </p>
+        </li>
+
+        <li class="side-menu-list">
+          <div class="img-wrap"><img class="side-image"
+              style="width: 100%; height: 220px; border-radius: 2px; transition: 1s all; object-fit: cover;"
+              src="https://chicken-street.jp/wp-content/uploads/2022/08/カワハギみりん干し.jpg" /></div>
+          <p class="side-menu-item">
+            <b>カワハギのみりん干し</b><br>
+            <span style="font-size: 90%;">Dried Filefish</span>
+          </p>
+
+          <div style="text-align: center;">
+            <p class="side-menu-desc">青唐辛子ソースで爽やかに！</p>
+          </div>
+
+          <p class="side-menu-price">
+            <b>¥350</b>
+          </p>
+        </li>
+
+        <li class="side-menu-list">
+          <div class="img-wrap"><img class="side-image"
+              style="width: 100%; height: 220px; border-radius: 2px; transition: 1s all; object-fit: cover;"
+              src="https://chicken-street.jp/wp-content/uploads/2022/08/グリーンサラダ.png" /></div>
+          <p class="side-menu-item">
+            <b>グリーンサラダ</b><br>
+            <span style="font-size: 90%;">Green Salad</span>
+          </p>
+
+          <div style="text-align: center;">
+            <p class="side-menu-desc">
+              さっぱりとしたドレッシングで<br>
+              ヘルシーに箸休め。</p>
+          </div>
+          <p class="side-menu-price">
+            <b>¥550</b>
+          </p>
+        </li>
+        <li class="side-menu-list">
+          <div class="img-wrap"><img class="side-image"
+              style="width: 100%; height: 220px; border-radius: 2px; transition: 1s all; object-fit: cover;"
+              src="https://chicken-street.jp/wp-content/uploads/2022/08/シーザーサラダ.png" /></div>
+          <p class="side-menu-item">
+            <b>シーザーサラダ</b><br>
+            <span style="font-size: 90%;">Caesar Salad</span>
+          </p>
+
+          <div style="text-align: center;">
+            <p class="side-menu-desc">チーズ好きにはたまらない！<br>
+              当店手作りのドレッシングを使った<br>
+              人気のサラダ。</p>
+          </div>
+          <p class="side-menu-price">
+            <b>¥650</b>
+          </p>
+        </li>
+        <li class="side-menu-list">
+          <div class="img-wrap"><img class="side-image"
+              style="width: 100%; height: 220px; border-radius: 2px; transition: 1s all; object-fit: cover;"
+              src="https://chicken-street.jp/wp-content/uploads/2022/08/オニオンリング.jpg" /></div>
+          <p class="side-menu-item">
+            <b>オニオンリング</b><br>
+            <span style="font-size: 90%;">Onion Ring</span>
+          </p>
+
+          <div style="text-align: center;">
+            <p class="side-menu-desc">
+              カリカリした衣と甘い玉ねぎに<br>
+              手が止まらない！ケチャップ付き。</p>
+          </div>
+          <p class="side-menu-price">
+            <b>¥400</b>
+          </p>
+        </li>
+        <li class="side-menu-list">
+          <div class="img-wrap"><img class="side-image"
+              style="width: 100%; height: 220px; border-radius: 2px; transition: 1s all; object-fit: cover;"
+              src="https://chicken-street.jp/wp-content/uploads/2022/08/ホットクリスピーオニオンリング.png" /></div>
+          <p class="side-menu-item">
+            <b>ホットクリスピーオニオンリング</b><br>
+            <span style="font-size: 90%;">Hot Crispy Onion Ring</span>
+          </p>
+
+          <div style="text-align: center;">
+            <p class="side-menu-desc">サクサク食感の中にスパイスの香り！<br>
+              スイートマヨネーズソース添え。</p>
+          </div>
+          <p class="side-menu-price">
+            <b>¥400</b>
+          </p>
+        </li>
+        <li class="side-menu-list">
+          <div class="img-wrap"><img class="side-image"
+              style="width: 100%; height: 220px; border-radius: 2px; transition: 1s all; object-fit: cover;"
+              src="https://chicken-street.jp/wp-content/uploads/2022/08/ガーリックフライドポテト.png" /></div>
+          <p class="side-menu-item">
+            <b>ガーリックフライドポテト</b><br>
+            <span style="font-size: 90%;">Garlic Fries</span>
+          </p>
+
+          <div style="text-align: center;">
+            <p class="side-menu-desc">
+              ビールのおつまみに最適！<br>
+              ケチャップ付き。</p>
+          </div>
+          <p class="side-menu-price">
+            <b>¥400</b>
+          </p>
+        </li>
+        <li class="side-menu-list">
+          <div class="img-wrap" style="margin: 0 auto;"><img class="side-image"
+              style="width: 100%; height: 220px; border-radius: 2px; transition: 1s all; object-fit: cover;"
+              src="https://chicken-street.jp/wp-content/uploads/2022/08/スプリンクルポテト.png" /></div>
+          <p class="side-menu-item">
+            <b>スプリンクルポテト</b><br>
+            <span style="font-size: 90%;">Sprinkle Fries</span>
+          </p>
+
+          <div style="text-align: center;">
+            <p class="side-menu-desc">ここでしか味わえない味が<br>
+              やみつきになる！</p>
+          </div>
+          <div style="text-align: center; color: #d6eac7; font-size: 80%; font-weight: bold;"></div>
+          <p class="side-menu-price">
+            <b>¥400</b>
+          </p>
+        </li>
+        <li class="side-menu-list">
+          <div class="img-wrap"><img class="side-image"
+              style="width: 100%; height: 220px; border-radius: 2px; transition: 1s all; object-fit: cover;"
+              src="https://chicken-street.jp/wp-content/uploads/2022/08/クリンクルポテト.png" /></div>
+          <p class="side-menu-item">
+            <b>クリンクルポテト<span style="font-size: 12px;">バターガーリックソース</span></b><br>
+            <span style="font-size: 90%;">Crinkle Potato Butter Garlic Sauce</span>
+          </p>
+
+          <div style="text-align: center;">
+            <p class="side-menu-desc">太めのポテトに濃厚ソースが<br>
+              たっぷりかかった一品。</p>
+          </div>
+          <p class="side-menu-price">
+            <b>¥500</b>
+          </p>
+        </li>
+        <li class="side-menu-list">
+          <div class="img-wrap">
+            <img class="side-image"
+              style="width: 100%; height: 220px; border-radius: 2px; transition: 1s all; object-fit: cover;"
+              src="https://chicken-street.jp/wp-content/uploads/2022/08/さつまいもスティック.png" />
+          </div>
+          <p class="side-menu-item">
+            <b>さつまいもスティック</b><br>
+            <span style="font-size: 90%;">Sweet Potato Stick</span>
+          </p>
+
+          <div style="text-align: center;">
+            <p class="side-menu-desc">ほくほくでカリカリな食感が<br>
+              おつまみにピッタリ！<br>
+              コチュジャンマヨネーズ添え。</p>
+          </div>
+          <p class="side-menu-price">
+            <b>¥450</b>
+          </p>
+        </li>
+        <li class="side-menu-list">
+          <div class="img-wrap"><img class="side-image"
+              style="width: 100%; height: 220px; border-radius: 2px; transition: 1s all; object-fit: cover;"
+              src="https://chicken-street.jp/wp-content/uploads/2022/08/ソトック.png" /></div>
+          <p class="side-menu-item">
+            <b>ソトック（2本）</b><br>
+            <span style="font-size: 90%;">Sotok（two）</span>
+          </p>
+
+          <div style="text-align: center;">
+            <p class="side-menu-desc">
+              細長いお餅とソーセージを<br>
+              串刺しにした韓国屋台の定番フード！</p>
+          </div>
+          <p class="side-menu-price">
+            <b>¥500</b>
+          </p>
+        </li>
+        <li class="side-menu-list">
+          <div class="img-wrap"><img class="side-image"
+              style="width: 100%; height: 220px; border-radius: 2px; transition: 1s all; object-fit: cover;"
+              src="https://chicken-street.jp/wp-content/uploads/2022/08/トッポギ.png" /></div>
+          <p class="side-menu-item">
+            <b>トッポギ</b><br>
+            <span style="font-size: 90%;">Tteokbokki</span>
+          </p>
+
+          <div style="text-align: center;">
+            <p class="side-menu-desc">もちもちの細長いお餅を甘辛い<br>
+              ソースで煮込んだ韓国の代表料理。<br>
+              当店自慢のソースが味の決め手！</p>
+          </div>
+          <p class="side-menu-price">
+            <b>¥600</b>
+          </p>
+        </li>
+
+        <li class="side-menu-list">
+          <div class="img-wrap"><img class="side-image"
+              style="width: 100%; height: 220px; border-radius: 2px; transition: 1s all; object-fit: cover;"
+              src="https://chicken-street.jp/wp-content/uploads/2022/08/ロゼトッポギ.jpg" /></div>
+          <p class="side-menu-item">
+            <b>ロゼトッポギ</b><br>
+            <span style="font-size: 90%;">Rosé Tteokbokki</span>
+          </p>
+
+          <div style="text-align: center;">
+            <p class="side-menu-desc">マイルドな味付けで人気急上昇！</p>
+          </div>
+
+          <p class="side-menu-price">
+            <b>¥650</b>
+          </p>
+        </li>
+
+        <li class="side-menu-list">
+          <div class="img-wrap"><img class="side-image"
+              style="width: 100%; height: 220px; border-radius: 2px; transition: 1s all; object-fit: cover;"
+              src="https://chicken-street.jp/wp-content/uploads/2022/08/揚げ餅ハニーバター.jpg" /></div>
+          <p class="side-menu-item">
+            <b>揚げ餅 ハニーバター</b><br>
+            <span style="font-size: 90%;">Fried Rice Cake Honey Butter</span>
+          </p>
+
+          <div style="text-align: center;">
+            <p class="side-menu-desc">韓国屋台定番おつまみ！</p>
+          </div>
+
+          <p class="side-menu-price">
+            <b>¥300</b>
+          </p>
+        </li>
+
+        <li class="side-menu-list">
+          <div class="img-wrap"><img class="side-image"
+              style="width: 100%; height: 220px; border-radius: 2px; transition: 1s all; object-fit: cover;"
+              src="https://chicken-street.jp/wp-content/uploads/2022/08/揚げ餅スノーチーズ.jpg" /></div>
+          <p class="side-menu-item">
+            <b>揚げ餅 スノーチーズ</b><br>
+            <span style="font-size: 90%;">Fried Rice Cake Snow Cheese</span>
+          </p>
+
+          <div style="text-align: center;">
+            <p class="side-menu-desc">韓国屋台定番おつまみ！</p>
+          </div>
+
+          <p class="side-menu-price">
+            <b>¥300</b>
+          </p>
+        </li>
+
+        <li class="side-menu-list">
+          <div class="img-wrap"><img class="side-image"
+              style="width: 100%; height: 220px; border-radius: 2px; transition: 1s all;"
+              src="https://chicken-street.jp/wp-content/uploads/2022/08/チーズライスコロッケ.png" /></div>
+          <p class="side-menu-item">
+            <b>チーズライスコロッケ(4個)</b><br>
+            <span style="font-size: 90%;">Cheese Rice Croquette（4pcs）</span>
+          </p>
+
+          <div style="text-align: center;">
+            <p class="side-menu-desc">お米が食べたいあなたに！<br>
+              チーズたっぷりのリゾットで作った<br>
+              ライスボール。</p>
+          </div>
+          <p class="side-menu-price">
+            <b>¥400</b>
+          </p>
+        </li>
+        <li class="side-menu-list">
+          <div class="img-wrap"><img class="side-image"
+              style="width: 100%; height: 220px; border-radius: 2px; transition: 1s all; object-fit: cover;"
+              src="https://chicken-street.jp/wp-content/uploads/2022/08/チーズボール.png" /></div>
+          <p class="side-menu-item">
+            <b>チーズボール（4個）</b><br>
+            <span style="font-size: 90%;">Cheese Balls（4pcs）</span>
+          </p>
+
+          <div style="text-align: center;">
+            <p class="side-menu-desc">サイドメニュー1番人気!<br>
+              外はサクサク、中はとろりと伸びる<br>
+              チーズがたまらない！</p>
+          </div>
+          <p class="side-menu-price">
+            <b>¥500</b>
+          </p>
+        </li>
+
+        <li class="side-menu-list">
+          <div class="img-wrap"><img class="side-image"
+              style="width: 100%; height: 220px; border-radius: 2px; transition: 1s all; object-fit: cover;"
+              src="https://chicken-street.jp/wp-content/uploads/2022/08/チョコレートボール.jpg" /></div>
+          <p class="side-menu-item">
+            <b>チョコレートボール（4個）</b><br>
+            <span style="font-size: 90%;">Chocolate Balls(4pcs)</span>
+          </p>
+
+          <div style="text-align: center;">
+            <p class="side-menu-desc">ビターな甘さでお酒にピッタリ！</p>
+          </div>
+
+          <p class="side-menu-price">
+            <b>¥500</b>
+          </p>
+        </li>
+
+        <li class="side-menu-list">
+          <div class="img-wrap" style="margin: 0 auto;"><img class="side-image"
+              style="width: 100%; height: 220px; border-radius: 2px; transition: 1s all; object-fit: cover;"
+              src="https://chicken-street.jp/wp-content/uploads/2022/08/ミルクフライ.png" /></div>
+          <p class="side-menu-item">
+            <b>ミルクフライ(揚げ牛乳) 6個</b><br>
+            <span style="font-size: 90%;">Fried Milk（6pcs）</span>
+          </p>
+
+          <div style="text-align: center;">
+            <p class="side-menu-desc">牛乳を揚げた<br>
+              韓国で人気なスイーツ！</p>
+          </div>
+          <p class="side-menu-price">
+            <b>¥400</b>
+          </p>
+        </li>
+        <li class="side-menu-list">
+          <div class="img-wrap"><img class="side-image"
+              style="width: 100%; height: 220px; border-radius: 2px; transition: 1s all; object-fit: cover;"
+              src="https://chicken-street.jp/wp-content/uploads/2022/08/辛ラーメン.png" /></div>
+          <p class="side-menu-item">
+            <b>辛ラーメン</b><br>
+            <span style="font-size: 90%;">Shin Ramyun</span>
+          </p>
+
+          <div style="text-align: center;">
+            <p class="side-menu-desc">韓国定番の味！</p>
+          </div>
+          <div style="text-align: center;"><small style="color: #258039">※単品のみ卵入り</small></div>
+          <p class="side-menu-price">
+            <b>¥600</b>
+          </p>
+        </li>
+        <li class="side-menu-list">
+          <div class="img-wrap" style="margin: 0 auto;"><img class="side-image"
+              style="width: 100%; height: 220px; border-radius: 2px; transition: 1s all; object-fit: cover;"
+              src="https://chicken-street.jp/wp-content/uploads/2022/08/JINラーメン.png" /></div>
+          <p class="side-menu-item">
+            <b>JINラーメン</b><br>
+            <span style="font-size: 90%;">Jin Ramyun</span>
+          </p>
+
+          <div style="text-align: center;">
+            <p class="side-menu-desc">辛さ控え目の人気ラーメン！</p>
+
+            <div style="text-align: center;"><small style="color: #258039">※単品のみ卵入り</small></div>
+          </div>
+          <p class="side-menu-price">
+            <b>¥600</b>
+          </p>
+        </li>
+      </ul>
+    </details>
+    <details open>
+      <summary id="lunch-menu"
+        style="font-weight: normal; cursor: pointer; text-align: center; font-size: larger;
+        color: #258039; border: 2px solid #258039; border-radius: 9999px; width: 320px; padding: 10px; position: relative; margin: 20px auto;">
+
+        <img width="29" style="position: absolute; left: 50px; top: 15px;"
+          src="https://chicken-street.jp/wp-content/uploads/2022/07/にわとりアイコン2.png">Lunch Set<br>
+        <span style="font-size: 70%;">ランチ (11:00-17:00)</span>
+      </summary>
+
+      <ul class="menu-wrapper">
+        <li>
+          <!-- <h3 class="t_soft">
+            <span style="font-weight: bold;">ランチセット(11:00-17:00)</span>
+          </h3> -->
+          <h4 class="lunch-ttl">
+            <span class="set-kind">A</span>
+            <span style="font-size: 120%">辛ラーメンセット</span>
+            <span style="grid-column: 2 / span 1; font-size: 90%;">Shin Ramyun Set</span>
+            <span style="font-size: 120%; font-weight: bold; text-align: end;">¥1100</span>
+          </h4>
+          <div class="set-img-wrapper">
+            <div style="margin-bottom: 10px;" class="set-img-photo">
+              <img class="set-img" src="https://chicken-street.jp/wp-content/uploads/2022/08/ランチ　辛ラーメン.png" />
+            </div>
+            <div class="chicken-area">
+              <p style="margin: 0;">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">韓国チキン</span>
+              </p>
+
+              <ul class="chicken-list">
+                <li>手羽先　1個</li>
+                <li>手羽元　1個</li>
+                <li>むね肉　1個</li>
+              </ul>
+              <div>
+                <p class="select">※ソースは9種より1つお選び下さい</p>
+                <ol class="chicken-source">
+                  <li>フライド</li>
+                  <li style="line-height: 1.3;">ヤンニョム</li>
+                  <li style="line-height: 1.3;">スパイシーヤンニョム(+¥50)</li>
+                  <li style="line-height: 1.3;">スノーチーズ</li>
+                  <li style="line-height: 1.3;">ハニーガーリック</li>
+                  <li style="line-height: 1.3;">ガーリック醤油</li>
+                  <li style="line-height: 1.3;">青唐辛子ガーリック</li>
+                  <li style="line-height: 1.3;">トガマヨ</li>
+                  <li style="line-height: 1.3;">スプリンクル(+¥100)</li>
+                </ol>
+              </div>
+            </div>
+            <div class="set-menu-side">
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">辛ラーメン</span>
+                <span class="piece">１個</span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">大根ピクルス</span>
+                <span class="piece">１個</span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">ドリンク</span>
+                <span class="piece">１個</span>
+              </div>
+              <p class="select">※以下の中からお選び下さい</p>
+              <ul class="set-drink">
+                <li style="line-height: 1.3;">ウーロン茶</li>
+                <li style="line-height: 1.3;">オレンジジュース</li>
+                <li style="line-height: 1.3;">アイスコーヒー</li>
+                <li style="line-height: 1.3;">アイスティー</li>
+              </ul>
+            </div>
+          </div>
+          <h4 class="lunch-ttl">
+            <span class="set-kind">B</span>
+            <span style="font-size: 120%">JINラーメンセット</span>
+            <span style="grid-column: 2 / span 1; font-size: 90%;">Jin Ramyun Set</span>
+            <span style="font-size: 120%; font-weight: bold; text-align: end;">¥1100</span>
+          </h4>
+
+          <div class="set-img-wrapper">
+            <div class="set-img-photo">
+              <img class="set-img" src="https://chicken-street.jp/wp-content/uploads/2022/08/ランチ　JINラーメン-1.png" />
+            </div>
+            <div class="chicken-area">
+              <p style="margin: 0;">
+                <span class="sp-text-sm">■</span>
+                <span>韓国チキン</span>
+              </p>
+
+              <ul class="chicken-list">
+                <li>手羽先　1個</li>
+                <li>手羽元　1個</li>
+                <li>むね肉　1個</li>
+              </ul>
+
+              <div>
+                <p class="select">※ソースは9種より1つお選び下さい</p>
+                <ol class="chicken-source">
+                  <li style="line-height: 1.3;">フライド</li>
+                  <li style="line-height: 1.3;">ヤンニョム</li>
+                  <li style="line-height: 1.3;">スパイシーヤンニョム(+¥50)</li>
+                  <li style="line-height: 1.3;">スノーチーズ</li>
+                  <li style="line-height: 1.3;">ハニーガーリック</li>
+                  <li style="line-height: 1.3;">ガーリック醤油</li>
+                  <li style="line-height: 1.3;">青唐辛子ガーリック</li>
+                  <li style="line-height: 1.3;">トガマヨ</li>
+                  <li style="line-height: 1.3;">スプリンクル(+¥100)</li>
+                </ol>
+              </div>
+            </div>
+            <div class="set-menu-side">
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">JINラーメン</span>
+                <span class="piece">１個</span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">大根ピクルス</span>
+                <span class="piece">１個</span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">ドリンク</span>
+                <span class="piece">１個</span>
+              </div>
+              <p class="select">※以下の中からお選び下さい</p>
+              <ul class="set-drink">
+                <li style="line-height: 1.3;">ウーロン茶</li>
+                <li style="line-height: 1.3;">オレンジジュース</li>
+                <li style="line-height: 1.3;">アイスコーヒー</li>
+                <li style="line-height: 1.3;">アイスティー</li>
+              </ul>
+            </div>
+          </div>
+          <h4 class="lunch-ttl">
+            <span class="set-kind">C</span>
+            <span style="font-size: 120%">サラダセット</span>
+            <span style="grid-column: 2 / span 1; font-size: 90%;">Salad Set</span>
+            <span style="font-size: 120%; font-weight: bold; text-align: end;">¥1100</span>
+          </h4>
+          <div class="set-img-wrapper">
+            <div style="margin-bottom: 10px;" class="set-img-photo">
+              <img class="set-img" src="https://chicken-street.jp/wp-content/uploads/2022/08/ランチ　サラダ.png" />
+            </div>
+            <div class="chicken-area">
+              <p style="margin: 0;">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">韓国チキン</span>
+              </p>
+
+              <ul class="chicken-list">
+                <li>手羽先　1個</li>
+                <li>手羽元　1個</li>
+                <li>むね肉　1個</li>
+              </ul>
+              <div>
+                <p class="select">※ソースは9種より1つお選び下さい</p>
+
+                <ol class="chicken-source">
+                  <li style="line-height: 1.3;">フライド</li>
+                  <li style="line-height: 1.3;">ヤンニョム</li>
+                  <li style="line-height: 1.3;">スパイシーヤンニョム(+¥50)</li>
+                  <li style="line-height: 1.3;">スノーチーズ</li>
+                  <li style="line-height: 1.3;">ハニーガーリック</li>
+                  <li style="line-height: 1.3;">ガーリック醤油</li>
+                  <li style="line-height: 1.3;">青唐辛子ガーリック</li>
+                  <li style="line-height: 1.3;">トガマヨ</li>
+                  <li style="line-height: 1.3;">スプリンクル(+¥100)</li>
+                </ol>
+              </div>
+            </div>
+            <div class="set-menu-side">
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">シーザーサラダ</span>
+                <span class="piece">１個</span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">フォカッチャ</span>
+                <span class="piece">１個</span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">ドリンク</span>
+                <span class="piece">１個</span>
+              </div>
+              <p class="select">※以下の中からお選び下さい</p>
+
+              <ul class="set-drink">
+                <li style="line-height: 1.3;">ウーロン茶</li>
+                <li style="line-height: 1.3;">オレンジジュース</li>
+                <li style="line-height: 1.3;">アイスコーヒー</li>
+                <li style="line-height: 1.3;">アイスティー</li>
+              </ul>
+            </div>
+          </div>
+
+          <h4 class="lunch-ttl">
+            <span class="set-kind">D</span>
+            <span style="font-size: 120%">韓国チキンセット</span>
+            <span style="grid-column: 2 / span 1; font-size: 90%;">Korean Fried Chicken Set</span>
+            <span style="font-size: 120%; font-weight: bold; text-align: end;">¥1200</span>
+          </h4>
+
+          <div class="set-img-wrapper">
+            <div style="margin-bottom: 10px;" class="set-img-photo">
+              <img class="set-img" src="https://chicken-street.jp/wp-content/uploads/2022/08/ランチ　韓国チキン.png" />
+            </div>
+
+            <div class="chicken-area">
+              <p style="margin: 0;">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">韓国チキン</span>
+              </p>
+              <ul class="chicken-list">
+                <li>手羽先　2個</li>
+                <li>手羽元　2個</li>
+                <li>むね肉　2個</li>
+              </ul>
+              <div>
+                <p class="select">※ソースは9種より1つお選び下さい</p>
+                <ol class="chicken-source">
+                  <li style="line-height: 1.3;">フライド</li>
+                  <li style="line-height: 1.3;">ヤンニョム</li>
+                  <li style="line-height: 1.3;">スパイシーヤンニョム(+¥50)</li>
+                  <li style="line-height: 1.3;">スノーチーズ</li>
+                  <li style="line-height: 1.3;">ハニーガーリック</li>
+                  <li style="line-height: 1.3;">ガーリック醤油</li>
+                  <li style="line-height: 1.3;">青唐辛子ガーリック</li>
+                  <li style="line-height: 1.3;">トガマヨ</li>
+                  <li style="line-height: 1.3;">スプリンクル(+¥100)</li>
+                </ol>
+              </div>
+            </div>
+            <div class="set-menu-side">
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">ミニサラダ</span>
+                <span class="piece">１個</span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">フォカッチャ</span>
+                <span class="piece">１個</span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">ドリンク</span>
+                <span class="piece">１個</span>
+              </div>
+              <p class="select">※以下の中からお選び下さい</p>
+              <ul class="set-drink">
+                <li>ウーロン茶</li>
+                <li>オレンジジュース</li>
+                <li>アイスコーヒー</li>
+                <li>アイスティー</li>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </details>
+    <details open>
+      <summary id="set"
+        style="font-weight: normal; cursor: pointer; text-align: center; font-size: larger; color: #258039; border: 2px solid #258039; border-radius: 9999px; width: 320px; padding: 10px; position: relative; margin: 20px auto;">
+        <img width="29" style="position: absolute; left: 50px; top: 20px;"
+          src="https://chicken-street.jp/wp-content/uploads/2022/07/にわとりアイコン2.png">
+        Set Menu<br>
+        <span style="font-size: 70%;">セット</span>
+      </summary>
+
+      <ul class="menu-wrapper">
+        <li>
+          <h3 class="set-title">
+            <span class="set-title-text">Aコンボ（1人前）/ Combo A</span>
+            <span class="combo-set-price">¥1100</span>
+          </h3>
+          <div class="set-img-wrapper">
+            <div style="margin-bottom: 10px;" class="set-img-photo">
+              <img class="set-img" src="https://chicken-street.jp/wp-content/uploads/2022/08/コンボA.png" />
+            </div>
+            <div class="chicken-area">
+              <p style="margin: 0;">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">韓国チキン</span>
+              </p>
+
+              <ul class="chicken-list">
+                <li>手羽元　1個</li>
+                <li>手羽先　1個</li>
+                <li>むね肉　1個</li>
+              </ul>
+              <p class="select">※ソースは9種より1つお選び下さい</p>
+
+              <ol class="chicken-source">
+                <li style="line-height: 1.3;">フライド</li>
+                <li style="line-height: 1.3;">ヤンニョム</li>
+                <li style="line-height: 1.3;">スパイシーヤンニョム(+¥50)</li>
+                <li style="line-height: 1.3;">スノーチーズ</li>
+                <li style="line-height: 1.3;">ハニーガーリック</li>
+                <li style="line-height: 1.3;">ガーリック醤油</li>
+                <li style="line-height: 1.3;">青唐辛子ガーリック</li>
+                <li style="line-height: 1.3;">トガマヨ</li>
+                <li style="line-height: 1.3;">スプリンクル(+¥100)</li>
+              </ol>
+            </div>
+            <div class="set-menu-side">
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">大根ピクルス</span>
+                <span class="piece">１個</span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">シーザーサラダ</span>
+                <span class="piece">１個</span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">フォカッチャ</span>
+                <span class="piece">１個</span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">フライドポテト</span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <h3 class="set-title">
+            <span class="set-title-text">Bコンボ（2人前）/ Combo B</span>
+            <span class="combo-set-price">¥2200</span>
+          </h3>
+          <div class="set-img-wrapper">
+            <div style="margin-bottom: 10px;" class="set-img-photo"><img class="set-img"
+                src="https://chicken-street.jp/wp-content/uploads/2022/08/コンボB.png" /></div>
+            <div class="chicken-area">
+              <p style="margin: 0;">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">韓国チキン</span>
+              </p>
+
+              <ul class="chicken-list">
+                <li>手羽元　2個</li>
+                <li>手羽先　2個</li>
+                <li>むね肉　2個</li>
+                <li>もも肉　2個</li>
+              </ul>
+              <p class="select">※ソースは9種より2つお選び下さい</p>
+
+              <ol class="chicken-source">
+                <li style="line-height: 1.3;">フライド</li>
+                <li style="line-height: 1.3;">ヤンニョム</li>
+                <li style="line-height: 1.3;">スパイシーヤンニョム(+¥50)</li>
+                <li style="line-height: 1.3;">スノーチーズ</li>
+                <li style="line-height: 1.3;">ハニーガーリック</li>
+                <li style="line-height: 1.3;">ガーリック醤油</li>
+                <li style="line-height: 1.3;">青唐辛子ガーリック</li>
+                <li style="line-height: 1.3;">トガマヨ</li>
+                <li style="line-height: 1.3;">スプリンクル(+¥100)</li>
+              </ol>
+            </div>
+            <div class="set-menu-side">
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">大根ピクルス</span>
+                <span class="piece">2個</span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">シーザーサラダ</span>
+                <span class="piece">2個</span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">フォカッチャ</span>
+                <span class="piece">2個</span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">フライドポテト</span>
+              </div>
+            </div>
+        </li>
+
+        <li>
+          <h3 class="set-title"><span class="set-title-text">Cコンボ（3人前）/ Combo C</span>
+            <span class="combo-set-price">¥3300</span>
+          </h3>
+          <div class="set-img-wrapper">
+            <div style="margin-bottom: 10px;" class="set-img-photo"><img class="set-img"
+                src="https://chicken-street.jp/wp-content/uploads/2022/08/コンボC.png" /></div>
+            <div class="chicken-area">
+              <p style="margin: 0;">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">韓国チキン</span>
+              </p>
+
+              <ul class="chicken-list">
+                <li>手羽元　3個</li>
+                <li>手羽先　3個</li>
+                <li>むね肉　3個</li>
+                <li>もも肉　3個</li>
+              </ul>
+              <p class="select">※ソースは9種より3つお選び下さい</p>
+
+              <ol class="chicken-source">
+                <li style="line-height: 1.3;">フライド</li>
+                <li style="line-height: 1.3;">ヤンニョム</li>
+                <li style="line-height: 1.3;">スパイシーヤンニョム(+¥50)</li>
+                <li style="line-height: 1.3;">スノーチーズ</li>
+                <li style="line-height: 1.3;">ハニーガーリック</li>
+                <li style="line-height: 1.3;">ガーリック醤油</li>
+                <li style="line-height: 1.3;">青唐辛子ガーリック</li>
+                <li style="line-height: 1.3;">トガマヨ</li>
+                <li style="line-height: 1.3;">スプリンクル(+¥100)</li>
+              </ol>
+            </div>
+            <div class="set-menu-side">
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">大根ピクルス</span>
+                <span class="piece">2個</span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">シーザーサラダ</span>
+                <span class="piece">2個</span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">フォカッチャ</span>
+                <span class="piece">2個</span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">フライドポテト</span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">オニオンリング</span>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <h3 class="set-title"><span class="set-title-text">チメクセットA（1人前）/ Chimaek set A</span>
+            <span class="chimaek-set-price">¥1480</span>
+          </h3>
+          <div class="set-img-wrapper">
+            <div style="margin-bottom: 10px;" class="set-img-photo">
+              <img class="set-img" src="https://chicken-street.jp/wp-content/uploads/2022/08/チメクA.png" />
+            </div>
+            <div class="chicken-area">
+              <p style="margin: 0;">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">韓国チキン</span>
+              </p>
+
+              <ul class="chicken-list">
+                <li>手羽元　1個</li>
+                <li>手羽先　1個</li>
+                <li>むね肉　1個</li>
+                <li>もも肉　1個</li>
+              </ul>
+              <p class="select">※ソースは9種より1つお選び下さい</p>
+
+              <ol class="chicken-source">
+                <li style="line-height: 1.3;">フライド</li>
+                <li style="line-height: 1.3;">ヤンニョム</li>
+                <li style="line-height: 1.3;">スパイシーヤンニョム(+¥50)</li>
+                <li style="line-height: 1.3;">スノーチーズ</li>
+                <li style="line-height: 1.3;">ハニーガーリック</li>
+                <li style="line-height: 1.3;">ガーリック醤油</li>
+                <li style="line-height: 1.3;">青唐辛子ガーリック</li>
+                <li style="line-height: 1.3;">トガマヨ</li>
+                <li style="line-height: 1.3;">スプリンクル(+¥100)</li>
+              </ol>
+            </div>
+            <div class="set-menu-side">
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">ガーリック<br><span style="padding-left: 50px">フライドポテト</span></span>
+                <span class="piece">1個</span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">大根ピクルス</span>
+                <span class="piece">1個</span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">
+                  ハニーバター<br>
+                  <span style="padding-left: 50px">アーモンド</span>
+                  <span class="piece">1袋</span></span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">グラスビール</span>
+                <span class="piece">1杯</span>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <h3 class="set-title"><span class="set-title-text">チメクセットB（2～3人前）/ Chimaek set B</span>
+            <span class="chimaek-set-price ">¥2980</span>
+          </h3>
+          <div class="set-img-wrapper">
+            <div style="margin-bottom: 10px;" class="set-img-photo">
+              <img class="set-img" src="https://chicken-street.jp/wp-content/uploads/2022/08/チメクB.png" />
+            </div>
+            <div class="chicken-area">
+              <p style="margin: 0;">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">韓国チキン</span>
+              </p>
+              <ul class="chicken-list">
+                <li>手羽元　3個</li>
+                <li>手羽先　3個</li>
+                <li>むね肉　3個</li>
+                <li>もも肉　3個</li>
+              </ul>
+              <p class="select">※ソースは9種より3つお選び下さい</p>
+
+              <ol class="chicken-source">
+                <li style="line-height: 1.3;">フライド</li>
+                <li style="line-height: 1.3;">ヤンニョム</li>
+                <li style="line-height: 1.3;">スパイシーヤンニョム(+¥50)</li>
+                <li style="line-height: 1.3;">スノーチーズ</li>
+                <li style="line-height: 1.3;">ハニーガーリック</li>
+                <li style="line-height: 1.3;">ガーリック醤油</li>
+                <li style="line-height: 1.3;">青唐辛子ガーリック</li>
+                <li style="line-height: 1.3;">トガマヨ</li>
+                <li style="line-height: 1.3;">スプリンクル(+¥100)</li>
+              </ol>
+            </div>
+            <div class="set-menu-side">
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">大根ピクルス</span>
+                <span class="piece">1個</span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">ハニーバター<br>
+                  <span style="padding-left: 50px">アーモンド</span></span>
+                <span class="piece">2袋</span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">グラスビール</span>
+                <span class="piece">2杯</span>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <h3 class="set-title"><span class="set-title-text">チメクセットC（3～4人前）/ Chimaek set C</span>
+            <span class="chimaek-set-price ">￥4380</span>
+          </h3>
+          <div class="set-img-wrapper">
+            <div style="margin-bottom: 10px;" class="set-img-photo">
+              <img class="set-img" src="https://chicken-street.jp/wp-content/uploads/2022/08/チメクC.png" />
+            </div>
+            <div class="chicken-area">
+              <p style="margin: 0;">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">韓国チキン</span>
+              </p>
+
+              <ul class="chicken-list">
+                <li>手羽元　5個</li>
+                <li>手羽先　5個</li>
+                <li>むね肉　5個</li>
+                <li>もも肉　5個</li>
+              </ul>
+
+              <p class="select">※ソースは9種より5つお選び下さい</p>
+
+              <ol class="chicken-source">
+                <li style="line-height: 1.3;">フライド</li>
+                <li style="line-height: 1.3;">ヤンニョム</li>
+                <li style="line-height: 1.3;">スパイシーヤンニョム(+¥50)</li>
+                <li style="line-height: 1.3;">スノーチーズ</li>
+                <li style="line-height: 1.3;">ハニーガーリック</li>
+                <li style="line-height: 1.3;">ガーリック醤油</li>
+                <li style="line-height: 1.3;">青唐辛子ガーリック</li>
+                <li style="line-height: 1.3;">トガマヨ</li>
+                <li style="line-height: 1.3;">スプリンクル(+¥100)</li>
+              </ol>
+            </div>
+            <div class="set-menu-side">
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">大根ピクルス</span>
+                <span class="piece">2個</span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">ハニーバター<br>
+                  <span style="padding-left: 50px">アーモンド</span></span>
+                <span class="piece">2袋</span>
+              </div>
+              <div class="set-item-wrapper">
+                <span class="sp-text-sm">■</span>
+                <span class="set-menu-item">グラスビール</span>
+                <span class="piece">3杯</span>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </details>
+  </main>
+</body>
+
+</html>
